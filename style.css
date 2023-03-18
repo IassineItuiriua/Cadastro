@@ -120,3 +120,12 @@ a{
 a:hover{
     color: #4038a0;
 }
+
+#msgError{
+    text-align: center;
+    color: #ff0000;
+    background-color: #ffbbbb;
+    padding: 10px;
+    border-radius: 4px;
+    display: none;
+}

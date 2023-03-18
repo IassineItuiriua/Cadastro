@@ -13,18 +13,21 @@
    <div class="container">
     <div class="card">
         <h1>Entrar</h1>
+
+        <div id="msgError"></div>
+
         <div class="label-float">
-            <input type="text" id="usuario" placeholder="" required>
-            <label for="usuario">Usuario</label>
+            <input type="text" id="email" placeholder="" required>
+            <label id="emailLabel" for="email">Email</label>
         </div>
 
         <div class="label-float">
             <input type="password" id="senha" placeholder="" required>
-            <label for="senha">Senha</label>
+            <label id="senhaLabel" for="senha">Senha</label>
         </div>
 
         <div class="justify-center">
-            <button>Entrar</button>
+            <button onclick="entrar()">Entrar</button>
         </div>
 
         <div class="justify-center">
@@ -38,4 +41,43 @@
     </div>
    </div> 
 </body>
+<script>
+    function entrar(){
+        let email = document.querySelector('#email')
+        let emailLabel = document.querySelector('#emailLabel')
+
+        let senha = document.querySelector('#senha')
+        let senhaLabel = document.querySelector('#senhaLabel')
+
+        let msgError = document.querySelector('msgError')
+        let listaUser = []
+
+        let userValid = {
+            email: '',
+            senha: ''
+        }
+
+        listaUser = JSON.parse(localStorage.getItem('listaUser'))
+
+        listaUser.forEach((item) => {
+            if(email.value == item.emailCad && senha.value == item.senhaCad){
+                userValid = {
+                    email: item.emailCad,
+                    senha: item.senhaCad
+                }
+            }
+        })
+
+        if(email.value == userValid.email && senha.value == userValid.senha){
+            window.location.href = 'https://iassineituiriua.github.io/Telaparalogar/'
+        } else {
+            emailLabel.setAttribute('style', 'color: red')
+            email.setAttribute('style', 'border-color: red')
+            senhaLabel.setAttribute('style', 'color: red')
+            senha.setAttribute('style', 'border-color: red')
+            msgError.setAttribute('style', 'display: block')
+            msgError.innerHTML = 'Email ou senha incorretos'
+        }
+    }
+</script>
 </html>
